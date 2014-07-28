@@ -2,6 +2,7 @@ package org.com.controller;
 
 import javax.inject.Inject;
 
+import org.com.converter.Base64Converter;
 import org.com.service.addressService;
 import org.com.vo.addressVO;
 import org.slf4j.Logger;
@@ -30,6 +31,8 @@ public class AddressController {
 	
 	@RequestMapping(value = "/address_check", method = RequestMethod.POST)
 	public @ResponseBody addressVO address_insert(addressVO addressVo) {
+		Base64Converter convert = new Base64Converter();
+		
 		logger.info("주소를 받아서 조회한후 있으면 있던값 리턴 없으면 insert 메서드 호출");
 		String url = addressVo.getAddress();
 		url = url.replace(" ", "");
@@ -41,6 +44,9 @@ public class AddressController {
 		select_addressvo = addressService.selectAddress(url);
 		
 		if(select_addressvo.getAddress_url() == null){
+			int index = addressService.getTopIndex();
+			++index;
+			String convert_str = convert.encode62(index);
 			
 		}else{
 			return addressVo;
