@@ -4,7 +4,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  
   <mapper namespace="org.com.mapper.addressMapper">
   	<select id="selectAddress" parameterType="java.lang.String" resultType="org.com.vo.addressVO">
   		SELECT * from address where address_url = #{address , jdbcType=VARCHAR}
